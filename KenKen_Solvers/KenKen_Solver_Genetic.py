@@ -102,6 +102,7 @@ def calculate_fitness(individual, cages, grid_size):
     return fitness
 
 
+
 def tournament_selection(population, fitness_scores, tournament_size):
     tournament_indices = np.random.randint(0, len(population), tournament_size)
     tournament_fitness = [fitness_scores[i] for i in tournament_indices]
@@ -114,6 +115,8 @@ def one_point_crossover(parent1, parent2):
     child2 = np.vstack((parent2[:crossover_point], parent1[crossover_point:]))
     return child1, child2
 
+
+# Purpose: Randomly swaps cells to introduce variation in solutions.
 def mutate(individual, mutation_rate):
     for i in range(grid_size):
         for j in range(grid_size):
@@ -122,6 +125,8 @@ def mutate(individual, mutation_rate):
                 individual[i][j], individual[row1][col1] = individual[row1][col1], individual[i][j]
     return individual
 
+
+# PMX (Partially Mapped Crossover) ensures that the offspring (children) maintain the order and position of genes (numbers) without introducing duplicates.
 def pmx_crossover(parent1, parent2):
     crossover_points = np.random.choice(grid_size - 1, 2, replace=False)
     crossover_points.sort()
@@ -148,7 +153,7 @@ def pmx_crossover(parent1, parent2):
 
     return child1, child2
 
-
+# Roulette Wheel Selection: Selects individuals probabilistically, favoring fitter solutions.
 def roulette_wheel_selection(population, fitness_scores):
     total_fitness = sum(fitness_scores)
     probabilities = [fitness / total_fitness for fitness in fitness_scores]
@@ -225,6 +230,18 @@ def genetic_algorithm(cages, grid_size, population_size, max_generations, mutati
     print(f"Time taken: {time.time() - start_time:.2f} seconds")
     performance_percentage = (1 - (best_fitness / float('inf'))) * 100 if best_fitness != 0 else 100
     return best_fitness, best_generation, performance_percentage, best_solution
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # def genetic_algorithm(cages, grid_size, population_size, max_generations, mutation_rate, elitism_rate, tolerance=1e-6):

@@ -123,6 +123,16 @@ def add_cage():
     dialog.grab_set()
     root.wait_window(dialog)
 
+def reset_puzzle():
+    """Reset the puzzle and cages to start fresh."""
+    global cages
+    cages = []  # Clear the cages list
+    size_entry.delete(0, tk.END)
+    size_entry.insert(0, "6")  # Default grid size
+    algorithm_choice.set("Backtracking")  # Default algorithm choice
+    messagebox.showinfo("Reset", "Puzzle and cages have been reset!")
+
+
 def start_solving():
     """Start solving process."""
     global grid_size, cages
@@ -176,6 +186,11 @@ def create_gui():
     ttk.Button(input_frame, text="Add Cage", command=add_cage , width=35).grid(row=2, column=0, columnspan=2,padx=10,pady=10)
 
     ttk.Button(input_frame, text="Solve Puzzle", command=start_solving, style="Accent.TButton" , width=35).grid(row=3, column=0, columnspan=2, pady=1)
+    
+    ttk.Button(input_frame, text="Reset Puzzle", command=reset_puzzle, width=35).grid(row=4, column=0, columnspan=2, pady=10)
+    # Footer Section for Team ID
+    footer = tk.Label(root, text="Team ID: 54", font=("Arial", 10, "bold"), bg="#00539C", fg="#FFFFFF", pady=10)
+    footer.pack(side="bottom", fill="x")
 
     root.mainloop()
 
