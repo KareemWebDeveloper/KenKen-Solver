@@ -196,7 +196,7 @@ def genetic_algorithm(cages, grid_size, population_size, max_generations, mutati
             return best_fitness, generation, performance_percentage, best_solution
         
         # Early termination check
-        # if abs(best_fitness - current_best_fitness) < tolerance:
+        # if abs(best_fitness - current_best_fitness) < tolerance and generation > max_generations * 0.30:
         #     print("Early termination: No significant improvement in the fitness value")
         #     print(f"The Fitness Value : {current_best_fitness}")
         #     print(f"Time taken: {time.time() - start_time:.2f} seconds")
